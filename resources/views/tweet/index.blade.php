@@ -27,14 +27,18 @@
         @foreach ($tweets as $tweet)
             <details>
                 <summary>{{ $tweet->id }}：{{ $tweet->content }} by {{ $tweet->user->name }}</summary>
-                <div>
-                    <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
-                    <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post" novalidate>
-                        @method('DELETE')
-                        @csrf
-                        <p><input type="submit" value="削除"></p>
-                    </form>
-                </div>
+                @if (\Illuminate\Support\Facades\Auth::id() == $tweet->user_id)
+                    <div>
+                        <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
+                        <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post" novalidate>
+                            @method('DELETE')
+                            @csrf
+                            <p><input type="submit" value="削除"></p>
+                        </form>
+                    </div>
+                @else
+                    <p>編集・削除できません</p>
+                @endif
             </details>
         @endforeach
     </div>
