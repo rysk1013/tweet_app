@@ -26,7 +26,7 @@
         @endauth
         @foreach ($tweets as $tweet)
             <details>
-                <summary>{{ $tweet->id }}：{{ $tweet->content }}</summary>
+                <summary>{{ $tweet->id }}：{{ $tweet->content }} by {{ $tweet->user->name }}</summary>
                 <div>
                     <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
                     <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post" novalidate>
