@@ -12,16 +12,18 @@
         <p style="color: lime;">{{ session('feedback.success') }}</p>
     @endif
     <div>
-        <form action="{{ route('tweet.create') }}" method="post" novalidate>
-            @csrf
-            <label for="tweet-content">つぶやき</label>
-            <span>140文字まで</span>
-            <textarea name="tweet" id="tweet-content" cols="30" placeholder="つぶやきを入力"></textarea>
-            @error('tweet')
-                <p style="color: red;">{{ $message }}</p>
-            @enderror
-            <p><input type="submit" value="投稿"></p>
-        </form>
+        @auth
+            <form action="{{ route('tweet.create') }}" method="post" novalidate>
+                @csrf
+                <label for="tweet-content">つぶやき</label>
+                <span>140文字まで</span>
+                <textarea name="tweet" id="tweet-content" cols="30" placeholder="つぶやきを入力"></textarea>
+                @error('tweet')
+                    <p style="color: red;">{{ $message }}</p>
+                @enderror
+                <p><input type="submit" value="投稿"></p>
+            </form>
+        @endauth
         @foreach ($tweets as $tweet)
             <details>
                 <summary>{{ $tweet->id }}：{{ $tweet->content }}</summary>
