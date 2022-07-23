@@ -27,6 +27,11 @@
                 <summary>{{ $tweet->id }}：{{ $tweet->content }}</summary>
                 <div>
                     <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
+                    <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post" novalidate>
+                        @method('DELETE')
+                        @csrf
+                        <p><input type="submit" value="削除"></p>
+                    </form>
                 </div>
             </details>
         @endforeach
