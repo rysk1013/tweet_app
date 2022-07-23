@@ -12,27 +12,33 @@
         <p style="color: lime;">{{ session('feedback.success') }}</p>
     @endif
     <div>
-        <form action="{{ route('tweet.create') }}" method="post" novalidate>
-            @csrf
-            <label for="tweet-content">つぶやき</label>
-            <span>140文字まで</span>
-            <textarea name="tweet" id="tweet-content" cols="30" placeholder="つぶやきを入力"></textarea>
-            @error('tweet')
-                <p style="color: red;">{{ $message }}</p>
-            @enderror
-            <p><input type="submit" value="投稿"></p>
-        </form>
+        @auth
+            <form action="{{ route('tweet.create') }}" method="post" novalidate>
+                @csrf
+                <label for="tweet-content">つぶやき</label>
+                <span>140文字まで</span>
+                <textarea name="tweet" id="tweet-content" cols="30" placeholder="つぶやきを入力"></textarea>
+                @error('tweet')
+                    <p style="color: red;">{{ $message }}</p>
+                @enderror
+                <p><input type="submit" value="投稿"></p>
+            </form>
+        @endauth
         @foreach ($tweets as $tweet)
             <details>
-                <summary>{{ $tweet->id }}：{{ $tweet->content }}</summary>
-                <div>
-                    <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
-                    <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post" novalidate>
-                        @method('DELETE')
-                        @csrf
-                        <p><input type="submit" value="削除"></p>
-                    </form>
-                </div>
+                <summary>{{ $tweet->id }}：{{ $tweet->content }} by {{ $tweet->user->name }}</summary>
+                @if (\Illuminate\Support\Facades\Auth::id() == $tweet->user_id)
+                    <div>
+                        <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
+                        <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post" novalidate>
+                            @method('DELETE')
+                            @csrf
+                            <p><input type="submit" value="削除"></p>
+                        </form>
+                    </div>
+                @else
+                    <p>編集・削除できません</p>
+                @endif
             </details>
         @endforeach
     </div>
