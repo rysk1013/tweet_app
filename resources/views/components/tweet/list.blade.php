@@ -2,7 +2,7 @@
     'tweets' => []
 ])
 
-<div class="bg-white rounded-md shadow-lg mt-5 mb-5">
+<div class="w-3/5 bg-white rounded-md shadow-lg mt-5 mb-5 mx-auto">
     <ul>
         @foreach ($tweets as $tweet)
             <li class="border-b last:border-b-0 border-gray-200 p-4 flex items-start justify-between">

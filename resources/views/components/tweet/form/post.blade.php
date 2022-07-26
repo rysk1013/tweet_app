@@ -1,5 +1,5 @@
 @auth
-    <div class="p-4">
+    <div class="mx-auto w-3/5 p-4">
         <form action="{{ route('tweet.create') }}" method="post" novalidate>
             @csrf
             <div class="mt-1">
