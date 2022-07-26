@@ -19,7 +19,7 @@ class PutController extends Controller
      */
     public function __invoke(UpdateRequest $request, TweetService $tweetService)
     {
-        if(!$tweetService->checkOwnTweet($request->user()->id, $request->id)) {
+        if(!$tweetService->checkOwnTweet($request->user()->id, $request->id())) {
             throw new AccessDeniedHttpException();
         }
 
