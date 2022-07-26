@@ -14,6 +14,7 @@
                 </div>
                 <div>
                     {{-- todo 編集・削除 --}}
+                    <x-tweet.options :tweetId="$tweet->id" :userId="$tweet->user_id"></x-tweet.options>
                 </div>
             </li>
         @endforeach
