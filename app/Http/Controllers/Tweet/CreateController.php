@@ -22,6 +22,7 @@ class CreateController extends Controller
         $tweet->content = $request->tweet();
         $tweet->save();
         return redirect()
-            ->route('tweet.index');
+            ->route('tweet.index')
+            ->with('feedback.success', '編集しました');
     }
 }
