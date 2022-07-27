@@ -21,10 +21,12 @@ Route::get('/', function () {
 Route::get('/sample', [App\Http\Controllers\Sample\IndexController::class, 'show']);
 Route::get('/sample/{id}', [App\Http\Controllers\Sample\IndexController::class, 'showId']);
 
+// Tweet
+Route::get('/tweet', App\Http\Controllers\Tweet\IndexController::class)
+->name('tweet.index');
+
 Route::middleware('auth')->group(function() {
     // Tweet
-    Route::get('/tweet', App\Http\Controllers\Tweet\IndexController::class)
-        ->name('tweet.index');
     Route::post('/tweet/create', App\Http\Controllers\Tweet\CreateController::class)
         ->name('tweet.create');
     Route::get('/tweet/update/{tweetId}', App\Http\Controllers\Tweet\Update\IndexController::class)
