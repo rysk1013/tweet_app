@@ -34,7 +34,7 @@ class SendDailyTweetCountMail extends Command
      */
     public function __construct(TweetService $tweetService, Mailer $mailer)
     {
-        parent::construct();
+        parent::__construct();
         $this->tweetService = $tweetService;
         $this->mailer = $mailer;
     }
