@@ -9,7 +9,7 @@ class TweetService
 {
     public function getTweets()
     {
-        return Tweet::orderBy('id', 'DESC')->get();
+        return Tweet::with('images')->orderBy('id', 'DESC')->get();
     }
 
     public function checkOwnTweet(int $userId, int $tweetId): bool
