@@ -17,13 +17,17 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new \Mmo\Faker\PicsumProvider($faker));
+        $faker->addProvider(new \Mmo\Faker\LoremSpaceProvider($faker));
+
         // ディレクトリがなければ作成する
         if (!Storage::exists('pablic/images')) {
             Storage::makeDirectory('public/images');
         }
 
         return [
-            'name' => $this->faker->image(storage_path('app/public/images'), 640, 480, null, false),
+            'name' => $faker->picsum(storage_path('app/public/images'), 640, 480, null, false),
         ];
     }
 }
