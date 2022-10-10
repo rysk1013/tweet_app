@@ -36,7 +36,7 @@
                 });
             },
             removeField(index) {
-                this.fields.splice(index, i);
+                this.fields.splice(index, 1);
             }
         }
     }
