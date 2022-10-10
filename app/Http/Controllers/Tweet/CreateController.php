@@ -25,6 +25,6 @@ class CreateController extends Controller
         );
         return redirect()
             ->route('tweet.index')
-            ->with('feedback.success', '編集しました');
+            ->with('feedback.success', '投稿しました');
     }
 }
